@@ -3,7 +3,7 @@ import { Parallax } from "react-parallax";
 const Cover = ({ img, title }) => {
   return (
     <Parallax
-      blur={{ min: -15, max: 15 }}
+      blur={{ min: -50, max: 50 }}
       bgImage={img}
       bgImageAlt="the Menu"
       strength={-200}
@@ -17,7 +17,7 @@ const Cover = ({ img, title }) => {
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
-            </p>
+            </p> 
           </div>
         </div>
       </div>

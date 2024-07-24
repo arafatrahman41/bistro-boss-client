@@ -15,7 +15,7 @@ const useMenu = () => {
         console.log(error.message);
       }
     };
-    menuData();
+    menuData(); 
   }, []);
 
   return [menu, loading]
