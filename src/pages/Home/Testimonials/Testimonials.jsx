@@ -15,7 +15,7 @@ const Testimonials = () => {
   useEffect(() => {
     const reviewsData = async () => {
       try {
-        const { data } = await axios("reviews.json");
+        const { data } = await axios("http://localhost:5000/reviews");
         setReviews(data);
         console.log(data);
       } catch (err) {
