@@ -8,7 +8,7 @@ const useMenu = () => {
   useEffect(() => {
     const menuData = async () => {
       try {
-        const { data } = await axios("menu.json");
+        const { data } = await axios("http://localhost:5000/menu");
         setMenu(data);
         setLoading(false)
       } catch (error) {
