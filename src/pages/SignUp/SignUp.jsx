@@ -1,24 +1,40 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    const { email, password } = data;
+    const { email, password, name, photoURL } = data;
     createUser(email, password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+      updateUserProfile(name, photoURL)
+        .then(() => {
+          console.log("user profile updated");
+          reset();
+          Swal.fire({
+            title: "Success",
+            text: "User created successfully",
+            icon: "success",
+            confirmButtonText: "ok",
+          });
+          navigate("/");
+        })
+        .catch((error) => console.log(error));
     });
   };
 
@@ -39,6 +55,17 @@ const SignUp = () => {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="photo URL"
+                  {...register("photoURL")}
+                  className="input input-bordered"
+                />
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
